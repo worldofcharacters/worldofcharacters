@@ -24,11 +24,26 @@ title: "World of Characters"
     return name;
   }
 
+  function comicId(path) {
+    return path.split('/').pop().split('.')[0];
+  }
+
+  function findComicByHash() {
+    var hash = window.location.hash.slice(1);
+    if (!hash) return -1;
+    for (var i = 0; i < comics.length; i++) {
+      if (comicId(comics[i]) === hash) return i;
+    }
+    return -1;
+  }
+
   function updateComic() {
     var img = document.getElementById('comic-image');
     var dateEl = document.getElementById('comic-date');
     img.src = comics[currentIndex];
     dateEl.textContent = filenameToDate(comics[currentIndex]);
+
+    window.location.hash = comicId(comics[currentIndex]);
 
     document.getElementById('btn-first').disabled = (currentIndex === 0);
     document.getElementById('btn-back').disabled = (currentIndex === 0);
@@ -41,7 +56,17 @@ title: "World of Characters"
   function goForward() { if (currentIndex < comics.length - 1) currentIndex++; updateComic(); }
   function goCurrent() { currentIndex = comics.length - 1; updateComic(); }
 
+  window.addEventListener('hashchange', function() {
+    var idx = findComicByHash();
+    if (idx !== -1 && idx !== currentIndex) {
+      currentIndex = idx;
+      updateComic();
+    }
+  });
+
   if (comics.length > 0) {
+    var startIdx = findComicByHash();
+    if (startIdx !== -1) currentIndex = startIdx;
     updateComic();
   }
 </script>
