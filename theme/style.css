@@ -235,8 +235,7 @@ main {
 }
 
 .comic-image {
-  max-width: 100%;
-  max-height: 70vh;
+  width: 70vw;
   display: block;
   margin: 0 auto 1.5rem;
 }
