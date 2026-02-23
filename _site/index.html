@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World of Characters</title>
+  <link rel="stylesheet" href="/theme/style.css">
+  <script>
+    (function() {
+      var theme = localStorage.getItem('woc-theme') || 'midnight-velvet';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+  <div class="theme-bar">
+    <span class="theme-bar-label">Theme</span>
+    <button class="theme-swatch" data-set-theme="midnight-velvet" title="Midnight Velvet"></button>
+    <button class="theme-swatch" data-set-theme="bleeding-heart" title="Bleeding Heart"></button>
+    <button class="theme-swatch" data-set-theme="graveyard-fog" title="Graveyard Fog"></button>
+    <button class="theme-swatch" data-set-theme="witching-hour" title="Witching Hour"></button>
+    <button class="theme-swatch" data-set-theme="black-rose" title="Black Rose"></button>
+    <button class="theme-swatch" data-set-theme="absinthe-tears" title="Absinthe Tears"></button>
+  </div>
+
+  <header>
+    <h1><a href="/">World of Characters</a></h1>
+    <nav>
+      <a href="/">Comic</a>
+      <a href="/about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    
+
+<p class="comic-date" id="comic-date"></p>
+<img class="comic-image" id="comic-image" src="" alt="Comic">
+
+<div class="comic-nav">
+  <button id="btn-first" onclick="goFirst()">First</button>
+  <button id="btn-back" onclick="goBack()">Back</button>
+  <button id="btn-forward" onclick="goForward()">Forward</button>
+  <button id="btn-current" onclick="goCurrent()">Current</button>
+</div>
+
+
+<script>
+  var comics = [
+    
+      "/assets/comics/2026-02-22.svg",
+    
+      "/assets/comics/2026-02-23-01.jpg",
+    
+      "/assets/comics/2026-02-23-02.jpg",
+    
+      "/assets/comics/2026-02-23-03.jpg",
+    
+      "/assets/comics/2026-02-23-04.jpg",
+    
+      "/assets/comics/2026-02-23-05.jpeg",
+    
+      "/assets/comics/2026-02-23-06.jpg",
+    
+      "/assets/comics/2026-02-23-07.jpg"
+    
+  ];
+
+  var currentIndex = comics.length - 1;
+
+  function filenameToDate(path) {
+    var name = path.split('/').pop().split('.')[0];
+    return name;
+  }
+
+  function updateComic() {
+    var img = document.getElementById('comic-image');
+    var dateEl = document.getElementById('comic-date');
+    img.src = comics[currentIndex];
+    dateEl.textContent = filenameToDate(comics[currentIndex]);
+
+    document.getElementById('btn-first').disabled = (currentIndex === 0);
+    document.getElementById('btn-back').disabled = (currentIndex === 0);
+    document.getElementById('btn-forward').disabled = (currentIndex === comics.length - 1);
+    document.getElementById('btn-current').disabled = (currentIndex === comics.length - 1);
+  }
+
+  function goFirst() { currentIndex = 0; updateComic(); }
+  function goBack() { if (currentIndex > 0) currentIndex--; updateComic(); }
+  function goForward() { if (currentIndex < comics.length - 1) currentIndex++; updateComic(); }
+  function goCurrent() { currentIndex = comics.length - 1; updateComic(); }
+
+  if (comics.length > 0) {
+    updateComic();
+  }
+</script>
+
+  </main>
+
+  <footer>
+    &copy; 2026 World of Characters
+  </footer>
+
+  <script>
+    (function() {
+      var current = localStorage.getItem('woc-theme') || 'midnight-velvet';
+      var swatches = document.querySelectorAll('.theme-swatch');
+
+      function setActive(themeName) {
+        swatches.forEach(function(s) {
+          s.classList.toggle('active', s.getAttribute('data-set-theme') === themeName);
+        });
+      }
+
+      setActive(current);
+
+      swatches.forEach(function(swatch) {
+        swatch.addEventListener('click', function() {
+          var theme = this.getAttribute('data-set-theme');
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('woc-theme', theme);
+          setActive(theme);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

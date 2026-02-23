@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found</title>
+  <link rel="stylesheet" href="/theme/style.css">
+  <script>
+    (function() {
+      var theme = localStorage.getItem('woc-theme') || 'midnight-velvet';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+  <div class="theme-bar">
+    <span class="theme-bar-label">Theme</span>
+    <button class="theme-swatch" data-set-theme="midnight-velvet" title="Midnight Velvet"></button>
+    <button class="theme-swatch" data-set-theme="bleeding-heart" title="Bleeding Heart"></button>
+    <button class="theme-swatch" data-set-theme="graveyard-fog" title="Graveyard Fog"></button>
+    <button class="theme-swatch" data-set-theme="witching-hour" title="Witching Hour"></button>
+    <button class="theme-swatch" data-set-theme="black-rose" title="Black Rose"></button>
+    <button class="theme-swatch" data-set-theme="absinthe-tears" title="Absinthe Tears"></button>
+  </div>
+
+  <header>
+    <h1><a href="/">World of Characters</a></h1>
+    <nav>
+      <a href="/">Comic</a>
+      <a href="/about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="not-found">
+  <h2>404</h2>
+  <p>Oops! This page doesn't exist.</p>
+  <p><a href="/">Go back to the comic</a></p>
+</div>
+
+  </main>
+
+  <footer>
+    &copy; 2026 World of Characters
+  </footer>
+
+  <script>
+    (function() {
+      var current = localStorage.getItem('woc-theme') || 'midnight-velvet';
+      var swatches = document.querySelectorAll('.theme-swatch');
+
+      function setActive(themeName) {
+        swatches.forEach(function(s) {
+          s.classList.toggle('active', s.getAttribute('data-set-theme') === themeName);
+        });
+      }
+
+      setActive(current);
+
+      swatches.forEach(function(swatch) {
+        swatch.addEventListener('click', function() {
+          var theme = this.getAttribute('data-set-theme');
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('woc-theme', theme);
+          setActive(theme);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

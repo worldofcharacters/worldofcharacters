@@ -1,0 +1,47 @@
+---
+layout: default
+title: "World of Characters"
+---
+
+{% assign comics = site.static_files | where_exp: "file", "file.path contains '/assets/comics/'" | sort: "name" %}
+
+<p class="comic-date" id="comic-date"></p>
+<img class="comic-image" id="comic-image" src="" alt="Comic">
+
+{% include comic-nav.html %}
+
+<script>
+  var comics = [
+    {% for comic in comics %}
+      "{{ comic.path | relative_url }}"{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  var currentIndex = comics.length - 1;
+
+  function filenameToDate(path) {
+    var name = path.split('/').pop().split('.')[0];
+    return name;
+  }
+
+  function updateComic() {
+    var img = document.getElementById('comic-image');
+    var dateEl = document.getElementById('comic-date');
+    img.src = comics[currentIndex];
+    dateEl.textContent = filenameToDate(comics[currentIndex]);
+
+    document.getElementById('btn-first').disabled = (currentIndex === 0);
+    document.getElementById('btn-back').disabled = (currentIndex === 0);
+    document.getElementById('btn-forward').disabled = (currentIndex === comics.length - 1);
+    document.getElementById('btn-current').disabled = (currentIndex === comics.length - 1);
+  }
+
+  function goFirst() { currentIndex = 0; updateComic(); }
+  function goBack() { if (currentIndex > 0) currentIndex--; updateComic(); }
+  function goForward() { if (currentIndex < comics.length - 1) currentIndex++; updateComic(); }
+  function goCurrent() { currentIndex = comics.length - 1; updateComic(); }
+
+  if (comics.length > 0) {
+    updateComic();
+  }
+</script>

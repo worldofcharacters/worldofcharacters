@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <link rel="stylesheet" href="/theme/style.css">
+  <script>
+    (function() {
+      var theme = localStorage.getItem('woc-theme') || 'midnight-velvet';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+  <div class="theme-bar">
+    <span class="theme-bar-label">Theme</span>
+    <button class="theme-swatch" data-set-theme="midnight-velvet" title="Midnight Velvet"></button>
+    <button class="theme-swatch" data-set-theme="bleeding-heart" title="Bleeding Heart"></button>
+    <button class="theme-swatch" data-set-theme="graveyard-fog" title="Graveyard Fog"></button>
+    <button class="theme-swatch" data-set-theme="witching-hour" title="Witching Hour"></button>
+    <button class="theme-swatch" data-set-theme="black-rose" title="Black Rose"></button>
+    <button class="theme-swatch" data-set-theme="absinthe-tears" title="Absinthe Tears"></button>
+  </div>
+
+  <header>
+    <h1><a href="/">World of Characters</a></h1>
+    <nav>
+      <a href="/">Comic</a>
+      <a href="/about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="about-content">
+
+  <h2 id="about-me">About Me</h2>
+
+  <p>Hi! I’m <strong>WorldOfCharacters</strong>, a 14-year-old girl from Fort Worth, Texas.</p>
+
+  <p>I love drawing and creating comics! I also paint with watercolors.</p>
+
+  <p>Some of my favorite things include:</p>
+
+  <ul>
+    <li><strong>A Bug’s Life</strong></li>
+    <li><strong>Wednesday</strong></li>
+    <li><strong>Smiling Critters</strong></li>
+    <li><strong>The Grinch</strong></li>
+    <li><strong>How To Train Your Dragon</strong></li>
+    <li><strong>Five Nights at Freddies</strong></li>
+    <li><strong>Stranger Things</strong></li>
+  </ul>
+
+  <p>Thanks for checking out my comics!</p>
+
+</div>
+
+  </main>
+
+  <footer>
+    &copy; 2026 World of Characters
+  </footer>
+
+  <script>
+    (function() {
+      var current = localStorage.getItem('woc-theme') || 'midnight-velvet';
+      var swatches = document.querySelectorAll('.theme-swatch');
+
+      function setActive(themeName) {
+        swatches.forEach(function(s) {
+          s.classList.toggle('active', s.getAttribute('data-set-theme') === themeName);
+        });
+      }
+
+      setActive(current);
+
+      swatches.forEach(function(swatch) {
+        swatch.addEventListener('click', function() {
+          var theme = this.getAttribute('data-set-theme');
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('woc-theme', theme);
+          setActive(theme);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

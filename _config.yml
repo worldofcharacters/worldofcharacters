@@ -1,0 +1,9 @@
+title: "World of Characters"
+description: "A web comic by WorldOfCharacters"
+baseurl: ""
+url: ""
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

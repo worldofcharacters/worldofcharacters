@@ -1,0 +1,316 @@
+/* ── Theme Definitions ── */
+
+[data-theme="midnight-velvet"] {
+  --bg: #0a0a0f;
+  --bg-subtle: #12111a;
+  --surface: #1a1825;
+  --border: #2d2640;
+  --text: #d4c6e6;
+  --text-muted: #7e6a9a;
+  --accent: #9b59b6;
+  --accent-hover: #c084e0;
+  --link: #b388d9;
+  --btn-bg: #1e1a2e;
+  --btn-border: #3d2f5c;
+  --btn-hover: #2e2545;
+  --header-text: #e0d0f5;
+  --footer-text: #4a3d66;
+  --theme-bar-bg: #0e0d16;
+}
+
+[data-theme="bleeding-heart"] {
+  --bg: #0d0508;
+  --bg-subtle: #150a0e;
+  --surface: #1f0f15;
+  --border: #3a1525;
+  --text: #e8c5d0;
+  --text-muted: #8a4a60;
+  --accent: #c0392b;
+  --accent-hover: #e74c5a;
+  --link: #e07a8a;
+  --btn-bg: #1c0c14;
+  --btn-border: #4a1a2d;
+  --btn-hover: #2d1520;
+  --header-text: #f0d0da;
+  --footer-text: #5a2535;
+  --theme-bar-bg: #0a0406;
+}
+
+[data-theme="graveyard-fog"] {
+  --bg: #090b0d;
+  --bg-subtle: #0f1214;
+  --surface: #161a1e;
+  --border: #2a3038;
+  --text: #b8c4cc;
+  --text-muted: #5a6a78;
+  --accent: #607888;
+  --accent-hover: #8aaabb;
+  --link: #7a9aad;
+  --btn-bg: #141a1f;
+  --btn-border: #354050;
+  --btn-hover: #222c35;
+  --header-text: #ccdae4;
+  --footer-text: #3a4854;
+  --theme-bar-bg: #070a0c;
+}
+
+[data-theme="witching-hour"] {
+  --bg: #08060d;
+  --bg-subtle: #100c18;
+  --surface: #170f24;
+  --border: #2a1e44;
+  --text: #cfc0e8;
+  --text-muted: #6e5a90;
+  --accent: #7b2fbe;
+  --accent-hover: #a855f7;
+  --link: #a07ae0;
+  --btn-bg: #150e24;
+  --btn-border: #352660;
+  --btn-hover: #221848;
+  --header-text: #ddd0f0;
+  --footer-text: #3e2e60;
+  --theme-bar-bg: #06050a;
+}
+
+[data-theme="black-rose"] {
+  --bg: #0a0608;
+  --bg-subtle: #120c0e;
+  --surface: #1c1218;
+  --border: #38202e;
+  --text: #dcc4d4;
+  --text-muted: #8a5a70;
+  --accent: #d63384;
+  --accent-hover: #f06aaa;
+  --link: #e080a8;
+  --btn-bg: #1a1016;
+  --btn-border: #4a2840;
+  --btn-hover: #2a1a24;
+  --header-text: #ecd4e4;
+  --footer-text: #502a40;
+  --theme-bar-bg: #080406;
+}
+
+[data-theme="absinthe-tears"] {
+  --bg: #060a06;
+  --bg-subtle: #0c120c;
+  --surface: #121a14;
+  --border: #223028;
+  --text: #c0d4c4;
+  --text-muted: #5a785e;
+  --accent: #4a8a50;
+  --accent-hover: #6abb70;
+  --link: #70aa78;
+  --btn-bg: #101a14;
+  --btn-border: #2a4a30;
+  --btn-hover: #1a2a1e;
+  --header-text: #d0e8d4;
+  --footer-text: #2e4832;
+  --theme-bar-bg: #040804;
+}
+
+/* ── Base Reset ── */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--accent-hover);
+}
+
+/* ── Theme Bar ── */
+
+.theme-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--theme-bar-bg);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.theme-bar-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-right: 0.25rem;
+}
+
+.theme-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.theme-swatch:hover {
+  transform: scale(1.2);
+}
+
+.theme-swatch.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  transform: scale(1.15);
+}
+
+.theme-swatch[data-set-theme="midnight-velvet"] {
+  background: linear-gradient(135deg, #9b59b6, #1a1825);
+}
+.theme-swatch[data-set-theme="bleeding-heart"] {
+  background: linear-gradient(135deg, #c0392b, #1f0f15);
+}
+.theme-swatch[data-set-theme="graveyard-fog"] {
+  background: linear-gradient(135deg, #607888, #161a1e);
+}
+.theme-swatch[data-set-theme="witching-hour"] {
+  background: linear-gradient(135deg, #7b2fbe, #170f24);
+}
+.theme-swatch[data-set-theme="black-rose"] {
+  background: linear-gradient(135deg, #d63384, #1c1218);
+}
+.theme-swatch[data-set-theme="absinthe-tears"] {
+  background: linear-gradient(135deg, #4a8a50, #121a14);
+}
+
+/* ── Header ── */
+
+header {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-subtle);
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+header h1 a {
+  color: var(--header-text);
+}
+
+header h1 a:hover {
+  text-decoration: none;
+  color: var(--accent-hover);
+}
+
+header nav a {
+  margin: 0 0.75rem;
+  font-size: 1rem;
+}
+
+/* ── Main ── */
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.comic-image {
+  max-width: 100%;
+  max-height: 70vh;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+.comic-date {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* ── Comic Nav ── */
+
+.comic-nav {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.comic-nav button {
+  background: var(--btn-bg);
+  color: var(--text);
+  border: 1px solid var(--btn-border);
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.comic-nav button:hover:not(:disabled) {
+  background: var(--btn-hover);
+  border-color: var(--accent);
+}
+
+.comic-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* ── About ── */
+
+.about-content {
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+.about-content h2 {
+  margin-bottom: 1rem;
+}
+
+.about-content p {
+  margin-bottom: 1rem;
+}
+
+/* ── Footer ── */
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  color: var(--footer-text);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ── 404 ── */
+
+.not-found {
+  text-align: center;
+}
+
+.not-found h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
