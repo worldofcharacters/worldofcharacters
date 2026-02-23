@@ -1,6 +1,6 @@
 title: "World of Characters"
 description: "A web comic by WorldOfCharacters"
-baseurl: ""
+baseurl: "/worldofcharacters"
 url: ""
 
 exclude:
